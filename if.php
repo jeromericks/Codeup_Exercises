@@ -24,9 +24,9 @@ if ($b >= $c) {
 // identical, equal, not identical, not equal
 if ($b === $c) {
      echo "$b is identical to $c\n";
-} elseif ($b == $c) {
+} else if ($b == $c) {
      echo "$b is equal to $c\n";
-} elseif ($b !== $c) {
+} else if ($b !== $c) {
      echo "$b is not identical to $c\n";
 } else {
      echo "$b is not equal to $c\n";
