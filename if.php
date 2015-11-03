@@ -26,10 +26,10 @@ if ($b === $c) {
      echo "$b is identical to $c\n";
 } else if ($b == $c) {
      echo "$b is equal to $c\n";
+} else if ($b != $c) {
+     echo "$b is not equal to $c\n";
 } else if ($b !== $c) {
      echo "$b is not identical to $c\n";
-} else {
-     echo "$b is not equal to $c\n";
-}
+} 
 
 ?>
