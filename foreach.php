@@ -20,11 +20,17 @@ foreach ($things as $thing) {
 	}
 }
 
+echo (PHP_EOL);
+echo (PHP_EOL);
+
 foreach ($things as $thing) {
 	if (is_scalar($thing)) {
 		echo ("$thing is scalar" . PHP_EOL);
 	} 
 }
+
+echo (PHP_EOL);
+echo (PHP_EOL);
 
 foreach ($things as $thing) {
 	if (is_array($thing)) {
