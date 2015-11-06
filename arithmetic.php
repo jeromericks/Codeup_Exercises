@@ -1,7 +1,7 @@
 <?php
 
 $a = 5;
-$b = hi;
+$b = 'hi';
 
 function add($a, $b) {
 	$noError = errorCheck($a, $b);
