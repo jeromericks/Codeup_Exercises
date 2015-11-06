@@ -56,11 +56,10 @@ print_r($companies);
 echo PHP_EOL;
 
 foreach($companies as $companyName => $people) {
-    echo PHP_EOL;
     sort($people);
-    echo "[$companyName] => ";
-    print_r($people) . PHP_EOL;
+    $companies[$companyName] = $people;
 }
+print_r($companies);
 
 echo PHP_EOL;
 
