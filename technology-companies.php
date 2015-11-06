@@ -57,8 +57,8 @@ echo PHP_EOL;
 
 foreach($companies as $companyName => $people) {
     echo PHP_EOL;
-    echo "[$companyName] => ";
     sort($people);
+    echo "[$companyName] => ";
     print_r($people) . PHP_EOL;
 }
 
