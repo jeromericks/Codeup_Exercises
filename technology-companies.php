@@ -55,11 +55,11 @@ print_r($companies);
 
 echo PHP_EOL;
 
-foreach($companies as $company) {
-    echo "Company" . PHP_EOL;
-    sort($company);
-    print_r($company);
-    echo "End" . PHP_EOL;
+foreach($companies as $companyName => $people) {
+    echo PHP_EOL;
+    echo "[$companyName] => ";
+    sort($people);
+    print_r($people) . PHP_EOL;
 }
 
 echo PHP_EOL;
