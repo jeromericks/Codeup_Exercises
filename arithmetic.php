@@ -1,32 +1,32 @@
 <?php
 
 $a = 5;
-$b = 4;
+$b = hi;
 
 function add($a, $b) {
-	$error = errorCheck($a, $b);
-	if($error) {
+	$noError = errorCheck($a, $b);
+	if($noError) {
 		return $a + $b . PHP_EOL;
 	}
 }
 
 function subtract($a, $b) {
-	$error = errorCheck($a, $b);
-	if($error) {
+	$noError = errorCheck($a, $b);
+	if($noError) {
 		return $a - $b . PHP_EOL;
 	}
 }
 
 function multiply($a, $b) {
-	$error = errorCheck($a, $b);
-	if($error) {
+	$noError = errorCheck($a, $b);
+	if($noError) {
 		return $a * $b . PHP_EOL;
 	}
 }
 
 function divide($a, $b) {
-	$error = errorCheck($a, $b);
-	if($error) {
+	$noError = errorCheck($a, $b);
+	if($noError) {
 		if($a == 0 || $b == 0) {
 			return "ERROR: cannot use zero as a variable" . PHP_EOL;
 		} else {
@@ -36,8 +36,8 @@ function divide($a, $b) {
 }
 
 function modulus($a, $b) {
-	$error = errorCheck($a, $b);
-	if($error) {
+	$noError = errorCheck($a, $b);
+	if($noError) {
 		if($a == 0 || $b == 0) {
 			return "ERROR: cannot use zero as a variable" . PHP_EOL;
 		} else {
