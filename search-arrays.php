@@ -36,9 +36,12 @@ function arrayHasValue($name) {
 
 function compareArray($compare, $names) {
 	$result = array_intersect($compare, $names);
-	// var_dump($result);
+	sort($result);
+	var_dump($result);
 	if ($result) {
-    	return $result[0] . PHP_EOL . $result[3] . PHP_EOL;
+		for($i = 0; $i <= count($result); $i++) {
+	    	return $result[$i] . PHP_EOL;
+		}
 	}
 }
 
