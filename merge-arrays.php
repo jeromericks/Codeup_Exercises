@@ -44,8 +44,7 @@ function combine_arrays($newArray, $controlArray) {
 		if($newArray[$i] == $controlArray[$i]) {
 			array_push($thirdArray, $newArray[$i]);
 		} else {
-			array_push($thirdArray, $newArray[$i]);
-			array_push($thirdArray, $controlArray[$i]);
+			array_push($thirdArray, $newArray[$i], $controlArray[$i]);
 		}
 	}
 	print_r($thirdArray);
