@@ -1,10 +1,15 @@
 <?php
 
 
-function humanizedList($array) 
+function humanizedList($array, $alphabeticalSort = false) 
 {
-   $array = implode(', ', $array);
-   return $array;
+	if($alphabeticalSort) {
+		sort($array);
+	}
+	$lastValue = array_pop($array);
+	$arrayString = implode(', ', $array);
+	$arrayString = $arrayString . ', and ' . $lastValue;
+	return $arrayString;
 }
 
 
