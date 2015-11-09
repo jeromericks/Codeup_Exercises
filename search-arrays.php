@@ -35,16 +35,16 @@ function arrayHasValue($name) {
 
 
 function compareArray($compare, $names) {
-	$result = array_intersect($compare, $names);
-	sort($result);
-	var_dump($result);
-	if ($result) {
-		for($i = 0; $i <= count($result); $i++) {
-	    	return $result[$i] . PHP_EOL;
+	$commonItems = 0;
+	foreach ($names as $key => $value) {
+		$check = array_search($value, $compare); 
+		if ($check !== false){   
+			$commonItems++;  
 		}
 	}
+	return "These arrays have {$commonItems} things in common" . PHP_EOL; 
 }
 
-echo compareArray($compare, $names); 
+echo compareArray($compare, $names) . PHP_EOL; 
 
 ?>
