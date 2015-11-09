@@ -52,4 +52,16 @@ function combine_arrays($newArray, $controlArray) {
 
 echo combine_arrays($names, $compare) . PHP_EOL;
 
+//for duplicates - won't duplicate if they occur at different indexes
+// function combineArray($newArray, $controlArray) {
+// 	foreach ($controlArray as $element) {
+// 		if(!lookInArray($element, $newArray)) {
+// 			array_push($newArray, $element);
+// 		}
+// 	}
+// 	print_r($newArray);
+// }
+
+// echo combineArray($names, $compare) . PHP_EOL;
+
 ?>
