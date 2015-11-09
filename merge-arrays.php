@@ -31,4 +31,9 @@ function compareArray($compare, $names) {
 
 echo compareArray($compare, $names) . PHP_EOL; 
 
+
+function combine_arrays() {
+
+}
+
 ?>
