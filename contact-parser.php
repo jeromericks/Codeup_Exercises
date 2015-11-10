@@ -7,14 +7,14 @@ function parseContacts($filename)
     // todo - read file and parse contacts
     $handle = fopen($filename, 'r');
     $contents = trim(fread($handle, filesize($filename)));
-    $contacts = explode("\n", $contents);
+    $content = explode("\n", $contents);
 
 
-    foreach ($contacts as $key => $contact) {
-    	$contact = explode('|', $contact);
+    foreach ($content as $key => $contact) {
+    	$contactArray = explode('|', $contact);
     	unset($contacts[$key]);
-  		$contacts[$key]['name'] = $contact[0];
-  		$contacts[$key]['number'] = numberSplit($contact[1]);
+  		$contacts[$key]['name'] = $contactArray[0];
+  		$contacts[$key]['number'] = numberSplit($contactArray[1]);
     }
 
     fclose($handle);
