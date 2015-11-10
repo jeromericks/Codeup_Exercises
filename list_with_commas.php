@@ -25,6 +25,5 @@ $famousFakePhysicists = humanizedList($physicistsArray);
 // Output sentence
 echo "Some of the most famous fictional theoretical physicists are {$famousFakePhysicists}." . PHP_EOL;
 
-// print_r($physicistsArray) . PHP_EOL;
 
 ?>
