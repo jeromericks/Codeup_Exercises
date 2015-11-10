@@ -2,23 +2,23 @@
 
 function parseContacts($filename)
 {
-    $contacts = array();
+    $contactsArray = array();
 
     // todo - read file and parse contacts
     $handle = fopen($filename, 'r');
-    $contents = trim(fread($handle, filesize($filename)));
-    $content = explode("\n", $contents);
+    $contentString = trim(fread($handle, filesize($filename)));
+    $arrayOfStrings = explode(PHP_EOL, $contentString);
 
 
-    foreach ($content as $key => $contact) {
-    	$contactArray = explode('|', $contact);
-    	unset($contacts[$key]);
-  		$contacts[$key]['name'] = $contactArray[0];
-  		$contacts[$key]['number'] = numberSplit($contactArray[1]);
+    foreach ($arrayOfStrings as $index => $contact) {
+    	$innerArray = explode('|', $contact);
+    	unset($arrayOfStrings[$index]);
+  		$contactsArray[$index]['name'] = $innerArray[0];
+  		$contactsArray[$index]['number'] = numberSplit($innerArray[1]);
     }
 
     fclose($handle);
-    return $contacts;
+    return $contactsArray;
 }
 
 function numberSplit($number) 
