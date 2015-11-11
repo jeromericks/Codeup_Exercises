@@ -19,7 +19,6 @@ function parseEmployees($filename)
 	for($i = 0; $i < 6; $i++){
 		$firstLines[] = array_shift($arrayOfStrings);
 	}
-	$data = count($arrayOfStrings);
 	foreach ($arrayOfStrings as $index => $employee) {
 		$innerArray = explode(', ', $employee);
 		unset($arrayOfStrings[$index]);
@@ -27,11 +26,7 @@ function parseEmployees($filename)
 		$employeesArray[$index]['Full Name'] = $innerArray[1] . ' ' . $innerArray[2];
 		$employeesArray[$index]['Employee Number'] = $innerArray[0];
 	}
-	$unit = unitTotal($employeesArray);
 	fclose($handle);
-	echo "Total Number of Employees: " . $data . PHP_EOL;
-	echo "Total Number of Units Sold: " . $unit . PHP_EOL;
-	echo "Average Units Sold Per Employee: " . $unit / $data . PHP_EOL;
 
 	return $employeesArray;
 }
@@ -45,13 +40,49 @@ function unitTotal($array)
 	return $sum;
 }
 
+function cleanOutputForEmployee($employee)
+{
+	$a = cleanString(8, $employee['Units']);
+	$b = cleanString(45, $employee['Full Name']);
+	$c = "         {$employee['Employee Number']}";
+	return "$a|$b|$c";
+}
+
+function cleanString($total_length, $string)
+{
+	$string_length = strlen($string);
+	$spaces = $total_length - $string_length -2;
+	$string = "  $string";
+	for($i = 0; $i < $spaces / 2; $i++) {
+		$string = " $string ";
+	}
+	if ($spaces % 2 === 0) {
+		$string .= ' ';
+	}
+	return $string;
+}
+
 
 $employee = parseEmployees("data/report.txt");
 
-function compareUnits($a, $b) 
-{
-	return (int)$b['Units'] - (int)$a['Units'];
-}
 	
-usort($employee, "compareUnits");
-print_r($employee);
+$data = count($employee);
+$unit = unitTotal($employee);
+
+echo PHP_EOL;
+echo "Total Number of Employees: " . $data . PHP_EOL;
+echo "Total Number of Units Sold: " . $unit . PHP_EOL;
+echo "Average Units Sold Per Employee: " . $unit / $data . PHP_EOL;
+echo PHP_EOL;
+
+arsort($employee);
+
+echo '  Units  |                   Full Name                  |   Employee Number' . PHP_EOL;
+echo '===========================================================================' . PHP_EOL;
+
+foreach($employee as $employeeString)
+{
+	echo cleanOutputForEmployee($employeeString) . PHP_EOL;
+}
+
+echo PHP_EOL;
