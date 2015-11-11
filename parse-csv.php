@@ -51,7 +51,7 @@ function cleanOutputForEmployee($employee)
 function cleanString($total_length, $string)
 {
 	$string_length = strlen($string);
-	$spaces = $total_length - $string_length -2;
+	$spaces = $total_length - $string_length - 2;
 	$string = "  $string";
 	for($i = 0; $i < $spaces / 2; $i++) {
 		$string = " $string ";
@@ -75,6 +75,7 @@ echo "Total Number of Units Sold: " . $unit . PHP_EOL;
 echo "Average Units Sold Per Employee: " . $unit / $data . PHP_EOL;
 echo PHP_EOL;
 
+//Sort the array by units from the highest to the lowest
 arsort($employee);
 
 echo '  Units  |                   Full Name                  |   Employee Number' . PHP_EOL;
