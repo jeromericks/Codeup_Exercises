@@ -65,8 +65,9 @@ function cleanString($total_length, $string)
 
 $employee = parseEmployees("data/report.txt");
 
-	
+//Saving the count of the employees into a variable called $data	
 $data = count($employee);
+//Saving the function call to a variable called $unit
 $unit = unitTotal($employee);
 
 echo PHP_EOL;
