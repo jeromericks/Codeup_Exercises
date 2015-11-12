@@ -23,4 +23,4 @@ function logError($message)
 }
 
 logInfo("This is an info message.");
-logError("This is an info message.");
+logError("This is an error message.");
