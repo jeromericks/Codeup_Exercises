@@ -1,13 +1,29 @@
 <?php
 
-$adjectives = ['Cheerful', 'Graceful', 'Hollow', 'Messy', 'Nasty', 'Furry', 'Ambiguous', 'Poor', 'Neat', 'Instinctive'];
-$nouns = ['Literature', 'Punishment', 'Alphabet', 'Saw', 'Latex', 'Sock', 'Flavor', 'Murderer', 'Bacteria', 'Pet'];
-$colors = ['blue', 'red', 'green', 'orange', 'yellow', 'purple'];
-$sizes = ['large', 'medium', 'little'];
-$adjective = array_rand($adjectives);
-$noun = array_rand($nouns); 
-$color = array_rand($colors);
-$size = array_rand($sizes);
+function pageController()
+{
+	$adjectives = ['Cheerful', 'Graceful', 'Hollow', 'Messy', 'Nasty', 'Furry', 'Ambiguous', 'Poor', 'Neat', 'Instinctive'];
+	$nouns = ['Literature', 'Punishment', 'Alphabet', 'Saw', 'Latex', 'Sock', 'Flavor', 'Murderer', 'Bacteria', 'Pet'];
+	$colors = ['blue', 'red', 'green', 'orange', 'yellow', 'purple'];
+	$sizes = ['large', 'medium', 'little'];
+	$adjective = array_rand($adjectives);
+	$noun = array_rand($nouns); 
+	$color = array_rand($colors);
+	$size = array_rand($sizes);
+
+	return array(
+		'adjectives' => $adjectives,
+		'nouns' => $nouns,
+		'colors' => $colors,
+		'sizes' => $sizes,
+		'adjective' => $adjective,
+		'noun' => $noun,
+		'color' => $color,
+		'size' => $size
+	);
+}
+
+extract(pageController());
 
 ?>
 <!DOCTYPE html>

@@ -1,11 +1,24 @@
 <?php
 
-$favorites = ['Pizza', 'Travelling', 'Movies', 'Lobster', 'Steak'];
-$colors = ['blue', 'red', 'green', 'orange', 'yellow', 'purple'];
-$sizes = ['large', 'medium', 'little'];
+function pageController()
+{
+	$favorites = ['Pizza', 'Travelling', 'Movies', 'Lobster', 'Steak'];
+	$colors = ['blue', 'red', 'green', 'orange', 'yellow', 'purple'];
+	$sizes = ['large', 'medium', 'little'];
 
-$color = array_rand($colors);
-$size = array_rand($sizes);
+	$color = array_rand($colors);
+	$size = array_rand($sizes);
+
+	return array(
+		'favorites' => $favorites,
+		'colors' => $colors,
+		'sizes' => $sizes,
+		'color' => $color,
+		'size' => $size
+	);
+}
+
+extract(pageController());
 
 ?>
 <!DOCTYPE html>
