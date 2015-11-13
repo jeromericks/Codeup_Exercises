@@ -13,13 +13,13 @@ function pageController()
 
 	return array(
 		'adjectives' => $adjectives,
-		'nouns' => $nouns,
-		'colors' => $colors,
-		'sizes' => $sizes,
-		'adjective' => $adjective,
-		'noun' => $noun,
-		'color' => $color,
-		'size' => $size
+		'nouns'      => $nouns,
+		'colors'     => $colors,
+		'sizes'      => $sizes,
+		'adjective'  => $adjective,
+		'noun'       => $noun,
+		'color'      => $color,
+		'size'       => $size
 	);
 }
 

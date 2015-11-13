@@ -11,10 +11,10 @@ function pageController()
 
 	return array(
 		'favorites' => $favorites,
-		'colors' => $colors,
-		'sizes' => $sizes,
-		'color' => $color,
-		'size' => $size
+		'colors'    => $colors,
+		'sizes'     => $sizes,
+		'color'     => $color,
+		'size'      => $size
 	);
 }
 
