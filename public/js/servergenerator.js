@@ -16,7 +16,6 @@ $(document).ready(function() {
 		}
 		if(count == 2) {
 			location.reload();
-			$('span').css('opacity', 1);
 		}
 	});
 

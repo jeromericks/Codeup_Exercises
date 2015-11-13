@@ -62,7 +62,6 @@ $(document).ready(function() {
 		}
 		if(count == 2) {
 			location.reload();
-			$('table').css('opacity', 1);
 		}
 	});
 
