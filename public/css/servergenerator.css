@@ -1,0 +1,56 @@
+body {
+	text-align: center;
+}
+
+span {
+	opacity: 0;
+}
+
+h2, button {
+	position: relative;
+}
+
+h2 {
+	margin-top: 0px;
+	margin-bottom: 0px;
+}
+
+.blue { 
+	color: #0000FF;
+}
+
+.red {
+	color: #FF0000;
+}
+
+.green {
+	color: #009933;
+}
+
+.orange {
+	color: #FF6600;
+}
+
+.yellow {
+	color: #FFFF00;
+}
+
+.purple {
+	color: #9900CC;
+}
+
+.large {
+	font-size: 30px;
+}
+
+.medium {
+	font-size: 20px;
+}
+
+.little {
+	font-size: 15px;
+}
+
+ul {
+	list-style: none;
+}

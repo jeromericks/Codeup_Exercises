@@ -1,0 +1,57 @@
+body {
+	text-align: center;
+}
+
+table {
+	opacity: 0;
+}
+
+table, button {
+	position: relative;
+}
+
+.blue { 
+	color: #0000FF;
+}
+
+.red {
+	color: #FF0000;
+}
+
+.green {
+	color: #009933;
+}
+
+.orange {
+	color: #FF6600;
+}
+
+.yellow {
+	color: #E5E600;
+}
+
+.purple {
+	color: #9900CC;
+}
+
+.large {
+	font-size: 30px;
+}
+
+.medium {
+	font-size: 20px;
+}
+
+.little {
+	font-size: 15px;
+}
+
+/* Purple background */
+.table>tbody>tr.active>td {
+	background-color: #FAE5FF;
+}
+
+tr:last-child {
+	border-bottom: 1px solid #DDD;
+}
+
