@@ -1,6 +1,6 @@
 <?php
 
-$favorites = ['Pizza', 'Vacation', 'Lobster', 'Shrimp', 'Steak'];
+$favorites = ['Pizza', 'Travelling', 'Movies', 'Lobster', 'Steak'];
 $colors = ['blue', 'red', 'green', 'orange', 'yellow', 'purple'];
 $sizes = ['large', 'medium', 'little'];
 
