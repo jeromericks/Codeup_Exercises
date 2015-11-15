@@ -2,7 +2,6 @@
 
 var_dump($_POST);
 
-
 ?>
 <!DOCTYPE html>
 <html>
