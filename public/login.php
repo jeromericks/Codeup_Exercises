@@ -43,7 +43,7 @@ extract(pageController());
 		<input type="text" name="username">
 		<label for="password">Password</label>
 		<input type="password" name="password">
-		<button>Submit</button>
+		<button class="btn btn-primary">Submit</button>
 	</form>
 </body>
 </html>
