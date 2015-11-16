@@ -2,15 +2,19 @@
 
 var_dump($_POST);
 
+session_start();
+
 $loginError = '';
 $username = '';
 $info = '';
+
 
 if(isset($_POST['username']) && isset($_POST['password'])) {
 	$username = htmlspecialchars(strip_tags($_POST['username']));
 	$password = htmlspecialchars(strip_tags($_POST['password']));
 
 	if($username == 'guest' && $password == 'password'){
+		$_SESSION['Logged_In_User'] = true;
 		header("Location: authorized.php");
 		die();
 	} else {
@@ -19,6 +23,8 @@ if(isset($_POST['username']) && isset($_POST['password'])) {
 		$username = strtoupper($username) . '!!!';
 	}
 }
+
+session_destroy();
 
 ?>
 <!DOCTYPE html>
