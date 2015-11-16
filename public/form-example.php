@@ -2,29 +2,21 @@
 
 var_dump($_POST);
 
-function pageController()
-{
-	$username = isset($_POST['username']) ? $_POST['username'] : '';
-	$password = isset($_POST['password']) ? $_POST['password'] : '';
-	$login = '';
 
-	if($username != '' || $password != '') {
-		if($username == 'guest' && $password == 'password'){
-			header("Location: authorized.php");
-			die();
-		} else {
-			$login = 'Login failed';
-		}
+$login = '';
+
+if(isset($_POST['username']) && isset($_POST['password'])) {
+	$username = $_POST['username'];
+	$password = $_POST['password'];
+	
+	if($username == 'guest' && $password == 'password'){
+		header("Location: authorized.php");
+		die();
+	} else {
+		$login = 'Login failed';
 	}
-
-	return array(
-		'login' => $login,
-		'username' => $username,
-		'password' => $password
-	);
 }
 
-extract(pageController());
 
 ?>
 <!DOCTYPE html>
@@ -32,9 +24,9 @@ extract(pageController());
 <head>
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="description" content="Assignment 7.1.4. POST Requests">
+	<meta name="description" content="Assignment 7.1.5. Handling User Input">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Login</title>
+	<title>Form Example</title>
 	<link rel="shortcut icon" href="/img/php.png">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 </head>
