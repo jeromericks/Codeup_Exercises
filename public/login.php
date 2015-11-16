@@ -43,7 +43,6 @@ if(isset($_POST['username']) && isset($_POST['password'])) {
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 	<link rel="stylesheet" href="/css/form-example.css">
 </head>
-
 <body>
 	<form method="POST" role="form">
 		<h4><?= $loginError ?></h4>

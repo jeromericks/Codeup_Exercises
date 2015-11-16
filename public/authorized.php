@@ -2,12 +2,13 @@
 
 session_start();
 
-if(!isset($_SESSION['LOGGED_IN_USER']) || !$_SESSION['LOGGED_IN_USER']) {
+if(!isset($_SESSION['LOGGED_IN_USER'])) {
 	header("Location: login.php");
 	die();
-} else {
-	$username = $_SESSION['LOGGED_IN_USER'];
-}
+} 
+
+$username = ucfirst($_SESSION['LOGGED_IN_USER']);
+
 
 ?>
 <!DOCTYPE html>
@@ -20,10 +21,11 @@ if(!isset($_SESSION['LOGGED_IN_USER']) || !$_SESSION['LOGGED_IN_USER']) {
 	<title>Authorized</title>
 	<link rel="shortcut icon" href="/img/php.png">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+	<link rel="stylesheet" href="/css/form-example.css">
 </head>
 <body>
 	<h2>Authorized</h2>
-	<?= $username ?>
+	<h2><?= $username ?></h2>
 	<a class="btn btn-primary" href="/logout.php">Logout</a>
 </body>
 </html>
