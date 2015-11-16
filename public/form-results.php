@@ -13,6 +13,7 @@ var_dump($_POST);
 	<title>Form Results</title>
 	<link rel="shortcut icon" href="/img/php.png">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+	<link rel="stylesheet" href="/css/form-example.css">
 </head>
 <body>
 	<h2>Form Results</h2>
