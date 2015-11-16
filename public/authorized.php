@@ -1,3 +1,15 @@
+<?php
+
+session_start();
+
+if(!isset($_SESSION['LOGGED_IN_USER']) || !$_SESSION['LOGGED_IN_USER']) {
+	header("Location: login.php");
+	die();
+} else {
+	$username = $_SESSION['LOGGED_IN_USER'];
+}
+
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,12 +21,9 @@
 	<link rel="shortcut icon" href="/img/php.png">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 </head>
-<?php
-
-var_dump($_POST);
-
-?>
 <body>
 	<h2>Authorized</h2>
+	<?= $username ?>
+	<a class="btn btn-primary" href="/logout.php">Logout</a>
 </body>
 </html>

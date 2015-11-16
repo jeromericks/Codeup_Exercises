@@ -1,3 +1,36 @@
+<?php
+
+var_dump($_POST);
+
+session_start();
+
+
+$loginError = '';
+$username = '';
+$info = '';
+
+
+if(isset($_SESSION['LOGGED_IN_USER'])) {
+	header("Location: authorized.php");
+	die();
+}
+
+if(isset($_POST['username']) && isset($_POST['password'])) {
+	$username = htmlspecialchars(strip_tags($_POST['username']));
+	$password = htmlspecialchars(strip_tags($_POST['password']));
+
+	if($username == 'guest' && $password == 'password'){
+		$_SESSION['LOGGED_IN_USER'] = $username;
+		header("Location: authorized.php");
+		die();
+	} else {
+		$loginError = 'Login failed';
+		$info = 'Enter the right information,';
+		$username = strtoupper($username) . '!!!';
+	}
+}
+
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,35 +43,7 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 	<link rel="stylesheet" href="/css/form-example.css">
 </head>
-<?php
 
-var_dump($_POST);
-
-session_start();
-
-$loginError = '';
-$username = '';
-$info = '';
-
-
-if(isset($_POST['username']) && isset($_POST['password'])) {
-	$username = htmlspecialchars(strip_tags($_POST['username']));
-	$password = htmlspecialchars(strip_tags($_POST['password']));
-
-	if($username == 'guest' && $password == 'password'){
-		$_SESSION['Logged_In_User'] = true;
-		header("Location: authorized.php");
-		die();
-	} else {
-		$loginError = 'Login failed';
-		$info = 'Enter the right information,';
-		$username = strtoupper($username) . '!!!';
-	}
-}
-
-session_destroy();
-
-?>
 <body>
 	<form method="POST" role="form">
 		<h4><?= $loginError ?></h4>
