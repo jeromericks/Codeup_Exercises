@@ -2,7 +2,7 @@
 
 var_dump($_POST);
 
-$login = '';
+$loginError = '';
 $username = '';
 $info = '';
 
@@ -14,7 +14,7 @@ if(isset($_POST['username']) && isset($_POST['password'])) {
 		header("Location: authorized.php");
 		die();
 	} else {
-		$login = 'Login failed';
+		$loginError = 'Login failed';
 		$info = 'Enter the right information,';
 		$username = strtoupper($username) . '!!!';
 	}
@@ -35,7 +35,7 @@ if(isset($_POST['username']) && isset($_POST['password'])) {
 </head>
 <body>
 	<form method="POST" role="form">
-		<h4><?= $login ?></h4>
+		<h4><?= $loginError ?></h4>
 		<div class="form-group">
 			<label for="username">Username</label>
 			<input type="text" class="form-control" name="username">
