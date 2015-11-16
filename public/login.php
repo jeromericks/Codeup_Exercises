@@ -2,29 +2,23 @@
 
 var_dump($_POST);
 
-function pageController()
-{
-	$username = isset($_POST['username']) ? $_POST['username'] : '';
-	$password = isset($_POST['password']) ? $_POST['password'] : '';
-	$login = '';
+$login = '';
+$username = '';
+$info = '';
 
-	if($username != '' || $password != '') {
-		if($username == 'guest' && $password == 'password'){
-			header("Location: authorized.php");
-			die();
-		} else {
-			$login = 'Login failed';
-		}
+if(isset($_POST['username']) && isset($_POST['password'])) {
+	$username = htmlspecialchars(strip_tags($_POST['username']));
+	$password = htmlspecialchars(strip_tags($_POST['password']));
+
+	if($username == 'guest' && $password == 'password'){
+		header("Location: authorized.php");
+		die();
+	} else {
+		$login = 'Login failed';
+		$info = 'Enter the right information,';
+		$username = strtoupper($username) . '!!!';
 	}
-
-	return array(
-		'login' => $login,
-		'username' => $username,
-		'password' => $password
-	);
 }
-
-extract(pageController());
 
 ?>
 <!DOCTYPE html>
