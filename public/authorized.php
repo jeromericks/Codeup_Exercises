@@ -1,5 +1,7 @@
 <?php
 
+require_once('functions.php');
+
 session_start();
 
 if(!isset($_SESSION['LOGGED_IN_USER'])) {

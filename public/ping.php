@@ -1,15 +1,17 @@
 <?php
 
+require_once('functions.php');
+
 function pageController()
 {
-	if(isset($_GET['game-over'])) {
-		$gameOver = $_GET['game-over'];
+	if(inputHas('gameOver')) {
+		$gameOver = inputGet('gameOver');
 		return array(
 			'gameOver' => $gameOver
 		);
 	}
 
-	$counter = isset($_GET['counter']) ? $_GET['counter'] : 0;
+	$counter = inputHas('counter') ? inputGet('counter') : 0;
 	$hit = $counter + 1;
 	$miss = $counter;
 
@@ -35,12 +37,12 @@ extract(pageController());
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 </head>
 <body>
-	<h2>Counter: <?= $counter; ?></h2>
 	<?php if(isset($gameOver)): ?>
 		<a href="pong.php">Play Again?</a>
 	<?php else: ?>
+		<h2>Counter: <?= $counter; ?></h2>
 		<a href="pong.php?counter=<?= $hit; ?>">Hit</a>
-		<a href="pong.php?game-over=true">Miss</a>
+		<a href="pong.php?gameOver=true">Miss</a>
 	<?php endif; ?>
 </body>
 </html>

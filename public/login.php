@@ -1,5 +1,7 @@
 <?php
 
+require_once('functions.php');
+
 var_dump($_POST);
 
 session_start();
@@ -15,9 +17,9 @@ if(isset($_SESSION['LOGGED_IN_USER'])) {
 	die();
 }
 
-if(isset($_POST['username']) && isset($_POST['password'])) {
-	$username = htmlspecialchars(strip_tags($_POST['username']));
-	$password = htmlspecialchars(strip_tags($_POST['password']));
+if(inputHas('username') && inputHas('password')) {
+	$username = escape($_REQUEST['username']);
+	$password = escape($_REQUEST['password']);
 
 	if($username == 'guest' && $password == 'password'){
 		$_SESSION['LOGGED_IN_USER'] = $username;
