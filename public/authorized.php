@@ -1,8 +1,3 @@
-<?php
-
-var_dump($_POST);
-
-?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,6 +9,11 @@ var_dump($_POST);
 	<link rel="shortcut icon" href="/img/php.png">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 </head>
+<?php
+
+var_dump($_POST);
+
+?>
 <body>
 	<h2>Authorized</h2>
 </body>
