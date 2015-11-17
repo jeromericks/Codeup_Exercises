@@ -11,7 +11,6 @@ if(!isset($_SESSION['LOGGED_IN_USER'])) {
 
 $username = ucfirst($_SESSION['LOGGED_IN_USER']);
 
-
 ?>
 <!DOCTYPE html>
 <html>
