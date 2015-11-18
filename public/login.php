@@ -1,6 +1,6 @@
 <?php
 
-require_once('functions.php');
+require_once('../Input.php');
 
 var_dump($_POST);
 
@@ -17,9 +17,9 @@ if(isset($_SESSION['LOGGED_IN_USER'])) {
 	die();
 }
 
-if(inputHas('username') && inputHas('password')) {
-	$username = escape($_REQUEST['username']);
-	$password = escape($_REQUEST['password']);
+if(Input::has('username') && Input::has('password')) {
+	$username = Input::escape(Input::get('username'));
+	$password = Input::escape(Input::get('password'));
 
 	if($username == 'guest' && $password == 'password'){
 		$_SESSION['LOGGED_IN_USER'] = $username;
