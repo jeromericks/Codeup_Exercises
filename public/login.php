@@ -1,35 +1,37 @@
 <?php
 
 require_once '../Input.php';
+require_once '../Auth.php';
 
 var_dump($_POST);
 
 session_start();
 
 
+$username = ucfirst(Input::escape(Input::get('username')));
+$password = Input::escape(Input::get('password'));
 $loginError = '';
-$username = '';
 $info = '';
 
 
-if(isset($_SESSION['LOGGED_IN_USER'])) {
+if(Auth::check()) {
 	header("Location: authorized.php");
 	die();
 }
 
-if(Input::has('username') && Input::has('password')) {
-	$username = Input::escape(Input::get('username'));
-	$password = Input::escape(Input::get('password'));
-
-	if($username == 'guest' && $password == 'password'){
-		$_SESSION['LOGGED_IN_USER'] = $username;
+if(!empty($_POST)) {
+	$log = new Log();
+	
+	if(Auth::attempt($username, $password)) {
+		$log->info("User {$username} logged in.");
 		header("Location: authorized.php");
 		die();
-	} else {
-		$loginError = 'Login failed';
-		$info = 'Enter the right information,';
-		$username = strtoupper($username) . '!!!';
-	}
+	} 
+	
+	$log->error("User {$username} failed to log in!");
+	$loginError = 'Login failed';
+	$info = 'Enter the right information,';
+	$username = strtoupper($username) . '!!!';
 }
 
 ?>

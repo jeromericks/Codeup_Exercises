@@ -1,15 +1,16 @@
 <?php
 
 require_once '../Input.php';
+require_once '../Auth.php';
 
 session_start();
 
-if(!isset($_SESSION['LOGGED_IN_USER'])) {
+if(!Auth::check()) {
 	header("Location: login.php");
 	die();
 } 
 
-$username = ucfirst($_SESSION['LOGGED_IN_USER']);
+$username = ucfirst(Auth::user());
 
 ?>
 <!DOCTYPE html>

@@ -8,7 +8,7 @@ class Log
 
 	public function __construct($prefix = 'log')
 	{
-		$this->filename = "data/" . $prefix . "-" . date("Y-m-d") . ".log";
+		$this->filename = "../data/" . $prefix . "-" . date("Y-m-d") . ".log";
 		$this->handle = fopen($this->filename, 'a');
 	}
 

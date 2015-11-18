@@ -30,7 +30,7 @@ class Input
         if(self::has($key)){
             return $_REQUEST[$key];
         }
-        return null;
+        return $default;
     }
 
     public static function escape($input)
