@@ -1,6 +1,6 @@
 <?php
 
-require_once('../Input.php');
+require_once '../Input.php';
 
 var_dump($_POST);
 
