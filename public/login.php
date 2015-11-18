@@ -8,8 +8,8 @@ var_dump($_POST);
 session_start();
 
 
-$username = ucfirst(Input::escape(Input::get('username')));
-$password = Input::escape(Input::get('password'));
+$username = ucfirst(Input::get('username'));
+$password = Input::get('password');
 $loginError = '';
 $info = '';
 
@@ -21,7 +21,7 @@ if(Auth::check()) {
 
 if(!empty($_POST)) {
 	$log = new Log();
-	
+
 	if(Auth::attempt($username, $password)) {
 		$log->info("User {$username} logged in.");
 		header("Location: authorized.php");
@@ -58,7 +58,7 @@ if(!empty($_POST)) {
 			<label for="password">Password</label>
 			<input type="password" class="form-control" name="password">
 		</div>
-		<h5><?= $info . ' ' . $username ?></h5>
+		<h5><?= $info . ' ' . Input::escape($username) ?></h5>
 		<button class="btn btn-primary">Submit</button>
 	</form>
 </body>

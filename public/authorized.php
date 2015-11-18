@@ -27,7 +27,7 @@ $username = ucfirst(Auth::user());
 </head>
 <body>
 	<h2>Authorized</h2>
-	<h2><?= $username ?></h2>
+	<h2><?= Input::escape($username) ?></h2>
 	<a class="btn btn-primary" href="/logout.php">Logout</a>
 </body>
 </html>
