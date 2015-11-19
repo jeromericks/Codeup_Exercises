@@ -1,5 +1,6 @@
 <?php
 
+date_default_timezone_set('America/Chicago');
 require_once '../Input.php';
 require_once '../Auth.php';
 
@@ -20,15 +21,12 @@ if(Auth::check()) {
 }
 
 if(!empty($_POST)) {
-	$log = new Log();
 
 	if(Auth::attempt($username, $password)) {
-		$log->info("User {$username} logged in.");
 		header("Location: authorized.php");
 		die();
 	} 
 	
-	$log->error("User {$username} failed to log in!");
 	$loginError = 'Login failed';
 	$info = 'Enter the right information,';
 	$username = strtoupper($username) . '!!!';

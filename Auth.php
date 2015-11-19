@@ -9,24 +9,24 @@ class Auth
 
 	public static function attempt($username, $password)
 	{
+		$log = new Log();
 		if($username == 'Guest' && password_verify($password, self::$password)){
 			$_SESSION['LOGGED_IN_USER'] = $username;
+			$log->info("User {$username} logged in.");
 			return true;
 		}
+		$log->error("User {$username} failed to log in!");
 		return false;
 	}
 
 	public static function check()
 	{
-		if(isset($_SESSION['LOGGED_IN_USER'])) {
-			return true;
-		}
-		return false;
+		return isset($_SESSION['LOGGED_IN_USER']) ? true : false;
 	}
 
 	public static function user()
 	{
-		return $_SESSION['LOGGED_IN_USER'];
+		return isset($_SESSION['LOGGED_IN_USER']) ? $_SESSION['LOGGED_IN_USER'] : null;
 	}
 
 	public static function logout()
