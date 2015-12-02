@@ -11,8 +11,6 @@ function pageController($dbc)
 	$pageNumber = Input::has('pageNumber') ? Input::get('pageNumber') : 1;
 	$pageNumber = ($pageNumber > 0) ? $pageNumber : 1;
 	$pageNumber = (is_numeric($pageNumber)) ? $pageNumber : 1;
-	$next = $pageNumber + 1;
-	$previous = $pageNumber - 1;
 	$selectAll = 'SELECT * FROM national_parks LIMIT ' . $limit . ' OFFSET ' . ($limit * $pageNumber - $limit) .';' ;
 
 	$stmt = $dbc->query($selectAll);
@@ -22,6 +20,10 @@ function pageController($dbc)
 	$count = $dbc->query('SELECT COUNT(*) FROM national_parks;')->fetchColumn();
 
 	$maxPage = ceil($count / $limit);
+	
+	$pageNumber = ($pageNumber < $maxPage + 1) ? $pageNumber : 1;
+	$next = $pageNumber + 1;
+	$previous = $pageNumber - 1;
 
 	return array(
 		'pageNumber' => $pageNumber,
@@ -84,12 +86,12 @@ function comma($number)
 	</table>
 	<nav>
 		<ul class="pager">
-			<li>
+			<li class="previous">
 				<?php if($pageNumber > 1): ?>
 					<a href="national_parks.php?pageNumber=<?= $previous ?>" name='previous'>Previous</a>
 				<?php endif ?>
 			</li>
-			<li>
+			<li class="next">
 				<?php if($maxPage > $pageNumber): ?>
 					<a href="national_parks.php?pageNumber=<?= $next ?>" name='next'>Next</a>
 				<?php endif ?>
