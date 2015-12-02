@@ -7,3 +7,7 @@ table {
 	border-right: 1px solid #ddd;
 	border-bottom: 1px solid #ddd;
 }
+
+.pager {
+	margin-left: -30px;
+}
