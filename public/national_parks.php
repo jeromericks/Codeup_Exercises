@@ -21,13 +21,16 @@ function pageController($dbc)
 
 	$count = $dbc->query('SELECT COUNT(*) FROM national_parks;')->fetchColumn();
 
+	$maxPage = ceil($count / $limit);
+
 	return array(
 		'pageNumber' => $pageNumber,
 		'previous' => $previous,
 		'next' => $next,
 		'parks' => $parks,
 		'count' => $count,
-		'limit' => $limit
+		'limit' => $limit,
+		'maxPage' => $maxPage
 	);
 }
 
@@ -87,14 +90,14 @@ function comma($number)
 				<?php endif ?>
 			</li>
 			<li>
-				<?php if($count / $limit > $pageNumber): ?>
+				<?php if($maxPage > $pageNumber): ?>
 					<a href="national_parks.php?pageNumber=<?= $next ?>" name='next'>Next</a>
 				<?php endif ?>
 			</li>
 		</ul>
 	</nav>
 	<div class="container-fluid">
-		<p>Page: <?= $pageNumber ?> of <?= ceil($count / $limit) ?></p>
+		<p>Page: <?= $pageNumber ?> of <?= $maxPage ?></p>
 	</div>
 </body>
 </html>
