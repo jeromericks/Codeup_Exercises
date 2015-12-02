@@ -9,6 +9,8 @@ function pageController($dbc)
 {
 	$limit = 2;
 	$pageNumber = Input::has('pageNumber') ? Input::get('pageNumber') : 1;
+	$pageNumber = ($pageNumber > 0) ? $pageNumber : 1;
+	$pageNumber = (is_numeric($pageNumber)) ? $pageNumber : 1;
 	$next = $pageNumber + 1;
 	$previous = $pageNumber - 1;
 	$selectAll = 'SELECT * FROM national_parks LIMIT ' . $limit . ' OFFSET ' . ($limit * $pageNumber - $limit) .';' ;
