@@ -7,9 +7,7 @@ echo $dbc->getAttribute(PDO::ATTR_CONNECTION_STATUS) . "\n";
 $delete = 'TRUNCATE national_parks';
 $dbc->exec($delete);
 
-$parks = [
-	['name'=>'', 'location'=>'', 'date_established'=>'', 'area_in_acres'=>'']
-];
+$parks = [];
 
 foreach($parks as $park) {
 	$query = "INSERT INTO national_parks(name, location, date_established, area_in_acres) 
