@@ -4,31 +4,46 @@ require_once '../config.php';
 require_once '../db_connect.php';
 require_once '../Input.php';
 
-$limit = 4;
 
-function pageController()
+function pageController($dbc)
 {
+	$limit = 2;
 	$pageNumber = Input::has('pageNumber') ? Input::get('pageNumber') : 1;
 	$next = $pageNumber + 1;
 	$previous = $pageNumber - 1;
+	$selectAll = 'SELECT * FROM national_parks LIMIT ' . $limit . ' OFFSET ' . ($limit * $pageNumber - $limit) .';' ;
+
+	$stmt = $dbc->query($selectAll);
+
+	$parks = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+	$count = $dbc->query('SELECT COUNT(*) FROM national_parks;')->fetchColumn();
 
 	return array(
 		'pageNumber' => $pageNumber,
 		'previous' => $previous,
-		'next' => $next
+		'next' => $next,
+		'parks' => $parks,
+		'count' => $count,
+		'limit' => $limit
 	);
 }
 
-extract(pageController());
+extract(pageController($dbc));
 
 
-$selectAll = 'SELECT * FROM national_parks LIMIT ' . $limit . ' OFFSET ' . ($limit * $pageNumber - $limit) .';' ;
+function comma($number)
+{
+	if(strlen($number) == 8) {
+		$number = substr($number, -9, 2) . ',' . substr($number, -6);
+	} else if(strlen($number) == 9) {
+		$number = substr($number, -9, 3) . ',' . substr($number, -6);
+	} else if(strlen($number) == 10) {
+		$number = substr($number, -10, 1) . ',' . substr($number, -9, 3) . ',' . substr($number, -6);
+	}
+	return $number;
+}
 
-$stmt = $dbc->query($selectAll);
-
-$parks = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-$count = $dbc->query('SELECT COUNT(*) FROM national_parks;')->fetchColumn();
 
 ?>
 <!DOCTYPE html>
@@ -45,7 +60,6 @@ $count = $dbc->query('SELECT COUNT(*) FROM national_parks;')->fetchColumn();
 </head>
 <body>
 	<h2>National Parks</h2>
-	<h3>Database Driven Web Application</h3>
 	<table class="table table-striped">
 		<tr>
 			<th>Park Name</th>
@@ -56,19 +70,29 @@ $count = $dbc->query('SELECT COUNT(*) FROM national_parks;')->fetchColumn();
 	<?php 
 		foreach($parks as $park): ?>
 			<tr>
-				<td><?= $park['name'] ?></td>
+				<td><a href="<?= $park['url'] ?>"><?= $park['name'] ?></a></td>
 				<td><?= $park['location'] ?></td>
 				<td><?= $park['date_established'] ?></td>
-				<td><?= $park['area_in_acres'] ?></td>
+				<td><?= comma($park['area_in_acres']) ?></td>
 			</tr>
 		<?php endforeach ?>
 	</table>
-	<?php if($pageNumber > 1): ?>
-		<a href="national_parks.php?pageNumber=<?= $previous ?>" name='previous'>Previous</a>
-	<?php endif ?>
-	<span><?= $pageNumber ?></span>
-	<?php if($count / $limit > $pageNumber): ?>
-	<a href="national_parks.php?pageNumber=<?= $next ?>" name='next' id='next'>Next</a>
-	<?php endif ?>
+	<nav>
+		<ul class="pager">
+			<li>
+				<?php if($pageNumber > 1): ?>
+					<a href="national_parks.php?pageNumber=<?= $previous ?>" name='previous'>Previous</a>
+				<?php endif ?>
+			</li>
+			<li>
+				<?php if($count / $limit > $pageNumber): ?>
+					<a href="national_parks.php?pageNumber=<?= $next ?>" name='next'>Next</a>
+				<?php endif ?>
+			</li>
+		</ul>
+	</nav>
+	<div class="container-fluid">
+		<p>Page: <?= $pageNumber ?> of <?= ceil($count / $limit) ?></p>
+	</div>
 </body>
 </html>
