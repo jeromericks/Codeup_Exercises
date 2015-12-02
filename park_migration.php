@@ -1,11 +1,8 @@
 <?php
 
-define('DB_HOST', '127.0.0.1');
-define('DB_NAME', 'parks_db');
-define('DB_USER', 'parks_user');
-define('DB_PASS', 'password');
-
+require 'config.php';
 require 'db_connect.php';
+
 
 $dbc->exec('DROP TABLE IF EXISTS national_parks');
 
@@ -18,6 +15,5 @@ $query = 'CREATE TABLE national_parks (
     PRIMARY KEY (id)
 )';
 
-$park = $dbc->exec($query);
+$dbc->exec($query);
 
-echo $park. PHP_EOL;

@@ -1,0 +1,19 @@
+body {
+	margin: 10px;
+}
+
+span {
+	position: absolute;
+	right: 50%;
+}
+
+#next {
+	position: absolute;
+	right: 10px;
+}
+
+table {
+	border-left: 1px solid #ddd;
+	border-right: 1px solid #ddd;
+	border-bottom: 1px solid #ddd;
+}
