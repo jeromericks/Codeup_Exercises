@@ -21,7 +21,11 @@ function pageController($dbc)
 
 	$maxPage = ceil($count / $limit);
 	
-	$pageNumber = ($pageNumber < $maxPage + 1) ? $pageNumber : 1;
+	if($pageNumber > $maxPage) {
+		$pageNumber = 1;
+		header("Location: national_parks.php?pageNumber=1");
+		die();
+	}
 	$next = $pageNumber + 1;
 	$previous = $pageNumber - 1;
 
