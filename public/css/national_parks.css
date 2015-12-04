@@ -8,3 +8,16 @@ table {
 	border-bottom: 1px solid #ddd;
 }
 
+.submit_form {
+	width: 50%;
+	margin-left: 25%;
+}
+
+h4 {
+	color: red;
+}
+
+.previous, .next {
+	vertical-align: top;
+	margin-top: 10px;
+}
