@@ -182,29 +182,30 @@ function checkValues()
 		<form method="POST">
 			<h4><?= $error ?></h4>
 			<div class="form-group">
-				<label for="name">Name</label>
-				<input type="text" class="form-control" name="name">
+				<label for="name">Name *</label>
+				<input type="text" class="form-control" name="name" placeholder="Enter a park name">
 			</div>
 			<div class="form-group">
-				<label for="location">Location</label>
-				<input type="text" class="form-control" name="location">
+				<label for="location">Location *</label>
+				<input type="text" class="form-control" name="location" placeholder="Park Location">
 			</div>
 			<div class="form-group">
-				<label for="date_established">Date Established</label>
+				<label for="date_established">Date Established *</label>
 				<input type="date" class="form-control" name="date_established">
 			</div>
 			<div class="form-group">
-				<label for="area_in_acres">Area (in acres)</label>
-				<input type="text" class="form-control" name="area_in_acres">
+				<label for="area_in_acres">Area (in acres) *</label>
+				<input type="text" class="form-control" name="area_in_acres" placeholder="Area in acres">
 			</div>
 			<div class="form-group">
-				<label for="description">Description</label>
-				<input type="text" class="form-control" name="description">
+				<label for="description">Description *</label>
+				<input type="text" class="form-control" name="description" placeholder="Park Description">
 			</div>
 			<div class="form-group">
-				<label for="url">URL</label>
-				<input type="url" class="form-control" name="url">
+				<label for="url">URL *</label>
+				<input type="url" class="form-control" name="url" placeholder="Park URL">
 			</div>
+			<p><small>* indicates a required field</small></p>
 			<button class="btn btn-primary">Submit</button>
 		</form>
 	</div>
