@@ -1,10 +1,9 @@
 <?php
 
-require_once '../Rectangle.php';
 require_once '../Square.php';
 
-$rectangle = new Rectangle(5, 4);
-$square = new Square(5, 5);
+$rectangle = new Rectangle(5, 8);
+$square = new Square(10);
 
 ?>
 <!DOCTYPE html>
@@ -16,8 +15,9 @@ $square = new Square(5, 5);
 	<link rel="shortcut icon" href="/img/php.png">
 </head>
 <body>
-	<p><?= $rectangle->area() ?></p>
-	<p><?= $square->area() ?></p>
-	<p><?= $square->perimeter() ?></p>
+	<p>Rectangle Area: <?= $rectangle->area() ?></p>
+	<p>Rectangle Perimeter: <?= $rectangle->perimeter() ?></p>
+	<p>Square Area: <?= $square->area() ?></p>
+	<p>Square Perimeter: <?= $square->perimeter() ?></p>
 </body>
 </html>

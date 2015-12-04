@@ -16,6 +16,11 @@ class Rectangle
     	return $this->height * $this->width;
     }
 
+    public function perimeter()
+    {
+    	return ($this->height + $this->width) * 2;
+    }
+
 }
 
 ?>
