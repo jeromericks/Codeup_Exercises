@@ -9,7 +9,7 @@ class Log
 	public function __construct($prefix = 'log')
 	{
 		$this->setFileName("data/" . $prefix . "-" . date("Y-m-d") . ".log");
-		$this->handle = fopen($this->getFileName(), 'a');
+		$this->setHandle(fopen($this->getFileName(), 'a'));
 	}
 
 	protected function setFileName($filename)
@@ -19,6 +19,11 @@ class Log
     	} else {
     		echo "Must use a sting for filename" . PHP_EOL;
     	}
+    }
+
+    protected function setHandle($handle)
+    {
+    	$this->handle = $handle;
     }
 
     public function getFileName()
