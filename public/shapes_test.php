@@ -15,9 +15,11 @@ $square = new Square(10);
 	<link rel="shortcut icon" href="/img/php.png">
 </head>
 <body>
-	<p>Rectangle Area: <?= $rectangle->area() ?></p>
-	<p>Rectangle Perimeter: <?= $rectangle->perimeter() ?></p>
-	<p>Square Area: <?= $square->area() ?></p>
-	<p>Square Perimeter: <?= $square->perimeter() ?></p>
+	<h2>Rectangle</h2>
+	<p>The area of a rectangle with a height of <?= $rectangle->height ?> and a width of <?= $rectangle->width ?> is <?= $rectangle->area() ?>.</p>
+	<p>The perimeter of said shape is <?= $rectangle->perimeter() ?>.</p>
+	<h2>Square</h2>
+	<p>The area of a square with a side of <?= $square->height ?> is <?= $square->area() ?>.</p>
+	<p>The perimeter of said shape is <?= $square->perimeter() ?>.</p>
 </body>
 </html>
