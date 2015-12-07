@@ -16,10 +16,10 @@ $square = new Square(10);
 </head>
 <body>
 	<h2>Rectangle</h2>
-	<p>The area of a rectangle with a height of <?= $rectangle->height ?> and a width of <?= $rectangle->width ?> is <?= $rectangle->area() ?>.</p>
+	<p>The area of a rectangle with a height of <?= $rectangle->getHeight() ?> and a width of <?= $rectangle->getWidth() ?> is <?= $rectangle->area() ?>.</p>
 	<p>The perimeter of said shape is <?= $rectangle->perimeter() ?>.</p>
 	<h2>Square</h2>
-	<p>The area of a square with a side of <?= $square->height ?> is <?= $square->area() ?>.</p>
+	<p>The area of a square with a side of <?= $square->getHeight() ?> is <?= $square->area() ?>.</p>
 	<p>The perimeter of said shape is <?= $square->perimeter() ?>.</p>
 </body>
 </html>
