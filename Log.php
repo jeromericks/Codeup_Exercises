@@ -16,6 +16,7 @@ class Log
     {
     	if(is_string($filename) && is_writable($filename)){
 	        $this->filename = trim($filename);
+	        touch($this->filename);
     	} else {
     		echo "Must use a sting for filename" . PHP_EOL;
     	}
