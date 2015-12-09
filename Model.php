@@ -5,7 +5,6 @@ class Model
 	private $attributes = [];
 	protected static $table;
 	protected static $dbc;
-
 	/*
      * Constructor
      */
@@ -21,8 +20,7 @@ class Model
     {
         if (!self::$dbc)
         {
-        	require_once 'config.php';
-			require_once 'db_connect.php';
+			require 'db_connect.php';
             self::$dbc = $dbc;
         }
     }
@@ -37,7 +35,6 @@ class Model
         if (array_key_exists($name, $this->attributes)) {
             return $this->attributes[$name];
         }
-
         return null;
     }
 
@@ -48,7 +45,7 @@ class Model
     {
   
         // @TODO: Ensure there are attributes before attempting to save
-    	if(!empty($this->attributes['id']) ) {
+    	if(!empty($this->attributes)) {
     		if (isset($this->attributes['id'])) {
 	    		$this->update($this->attributes['id']);
     		} else {
@@ -56,19 +53,14 @@ class Model
     		}
     	}
         // @TODO: Perform the proper action - if the `id` is set, this is an update, if not it is a insert
-
         // @TODO: Ensure that update is properly handled with the id key
-
         // @TODO: After insert, add the id back to the attributes array so the object can properly reflect the id
-
         // @TODO: You will need to iterate through all the attributes to build the prepared query
-
         // @TODO: Use prepared statements to ensure data security
     }
 
     protected function insert()
     {
-    	$newKeysArray = [];
     	$keysArray = array_keys($this->attributes);
     	$table = static::$table;
 
@@ -100,6 +92,7 @@ class Model
             $update = $key . ' = :' . $key;
             array_push($updateArray, $update);
         }
+
         $updateString = implode(', ', $updateArray);
        	$updateString = "UPDATE $table SET $updateString WHERE id = :id";
 
@@ -107,11 +100,11 @@ class Model
         
         foreach ($this->attributes as $key => $value) {
             $stmt->bindValue(':'. $key, $this->attributes[$key], PDO::PARAM_STR);
-            $stmt->bindValue(':id', $id, PDO::PARAM_STR);
+            $stmt->bindValue(':id', $id, PDO::PARAM_INT);
         }
         $stmt->execute();
-		
     }
+
     /*
      * Find a record based on an id
      */
@@ -123,9 +116,8 @@ class Model
 
         // @TODO: Create select statement using prepared statements
         $query = "SELECT * FROM $table WHERE id = :id";
-
         $stmt = self::$dbc->prepare($query);
-        $stmt->bindValue(':id', $id, PDO::PARAM_STR);
+        $stmt->bindValue(':id', $id, PDO::PARAM_INT);
         $stmt->execute();
 
         // @TODO: Store the resultset in a variable named $result
@@ -152,12 +144,32 @@ class Model
         $table = static::$table;
 
         $query = "SELECT * FROM $table";
-
-        $stmt = self::$dbc->query($query);
+        $stmt = self::$dbc->prepare($query);
+        $stmt->execute();
 
         $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        // @TODO: Learning from the previous method, return all the matching records
-        return $results;
+
+        $instance = null;
+        if ($results)
+        {
+            $instance = new static;
+            $instance->attributes = $results;
+        } else {
+            $instance = "Users not found";
+        }
+        return $instance;
+    }
+
+    public static function delete($id)
+    {
+        // Get connection to the database
+        self::dbConnect();
+        $table = static::$table;
+
+        $query = "DELETE FROM $table WHERE id = :id";
+        $stmt = self::$dbc->prepare($query);
+        $stmt->bindValue(':id', $id, PDO::PARAM_INT);
+        $stmt->execute();
     }
 
     public static function getTableName()
@@ -169,7 +181,5 @@ class Model
     {
     	return $this->attributes;
     }
-
 }
-
 ?>
