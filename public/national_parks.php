@@ -1,6 +1,6 @@
 <?php
 
-require_once '../config.php';
+require_once '../nat_config.php';
 require_once '../db_connect.php';
 require_once '../Input.php';
 
@@ -96,12 +96,12 @@ function deletePark($dbc)
 
 function insertPark($dbc)
 {
-	$name = Input::get('name');
-	$location = Input::get('location');
-	$date_established = Input::get('date_established');
-	$area_in_acres = Input::get('area_in_acres');
-	$url = Input::get('url');
-	$description = Input::get('description');
+	$name = Input::getString('name');
+	$location = Input::getString('location');
+	$date_established = Input::getDate('date_established');
+	$area_in_acres = Input::getNumber('area_in_acres');
+	$url = Input::getString('url');
+	$description = Input::getString('description');
 
 	$userInput = $dbc->prepare('INSERT INTO national_parks (name, location, date_established, area_in_acres, url, description) VALUES (:name, :location, :date_established, :area_in_acres, :url, :description)');		
 	$userInput->bindValue(':name', ucfirst($name),  PDO::PARAM_STR);
@@ -115,12 +115,7 @@ function insertPark($dbc)
 
 function checkValues()
 {
-	Input::notEmpty('name') && 
-	Input::notEmpty('location') && 
-	Input::notEmpty('date_established') && 
-	Input::notEmpty('area_in_acres') && 
-	Input::notEmpty('description') && 
-	Input::notEmpty('url');
+	return (Input::notEmpty('name') && Input::notEmpty('location') && Input::notEmpty('date_established') && Input::notEmpty('area_in_acres') && Input::notEmpty('description') && Input::notEmpty('url'));
 }
 
 
@@ -134,7 +129,7 @@ function checkValues()
     <meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>National Parks</title>
 	<link rel="shortcut icon" href="/img/php.png">
-	<link rel="stylesheet" href="/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 	<link rel="stylesheet" href="/css/national_parks.css">
 </head>
 <body>
@@ -191,7 +186,7 @@ function checkValues()
 			</div>
 			<div class="form-group">
 				<label for="date_established">Date Established *</label>
-				<input type="date" class="form-control" name="date_established">
+				<input type="text" class="form-control" name="date_established" placeholder="MM/DD/YYYY">
 			</div>
 			<div class="form-group">
 				<label for="area_in_acres">Area (in acres) *</label>

@@ -1,6 +1,6 @@
 <?php
 
-require 'config.php';
+require 'nat_config.php';
 require 'db_connect.php';
 
 

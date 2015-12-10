@@ -49,16 +49,31 @@ class Input
 
     public static function getString($key)
     {
-        if(!is_string(self::get($key))){
+        $value = trim(self::get($key));
+        if(!is_string($value)){
             throw new Exception("{$key} must be a string!");
         }
+        return $value;
     }
 
     public static function getNumber($key)
     {
-        if(!is_int(self::get($key))){
-            throw new Exception("{$key} must be a number!");
+        $value = trim(str_replace(',', '', self::get($key)));
+        if(!is_numeric($value) || $value < 0){
+            throw new Exception("{$key} must be a positive number!");
+        } 
+        return $value;
+    }
+
+    public static function getDate($key)
+    {
+        $date = self::get($key);
+        if(!strtotime($date)){
+            throw new Exception("{$key} must be a valid date in the format of MM/DD/YYYY!");
+        } else {
+            return date("Y-m-d", strtotime($date));
         }
+        
     }
 
     ///////////////////////////////////////////////////////////////////////////
