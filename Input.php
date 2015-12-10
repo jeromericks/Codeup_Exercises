@@ -50,14 +50,14 @@ class Input
     public static function getString($key)
     {
         if(!is_string(self::get($key))){
-            throw new Exception('$key must be a string!');
+            throw new Exception("{$key} must be a string!");
         }
     }
 
     public static function getNumber($key)
     {
         if(!is_int(self::get($key))){
-            throw new Exception('$key must be a number!');
+            throw new Exception("{$key} must be a number!");
         }
     }
 
