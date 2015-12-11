@@ -8,8 +8,8 @@ require_once '../Input.php';
 function pageController($dbc)
 {
 	var_dump($_POST);
-
 	$error = '';
+	$errors = NULL;
 	$limit = 2;
 	$pageNumber = Input::has('pageNumber') ? Input::get('pageNumber') : 1;
 	$pageNumber = ($pageNumber > 0) ? $pageNumber : 1;
@@ -18,7 +18,7 @@ function pageController($dbc)
 
 	if(!empty($_POST)){
 		if(checkValues()) {
-			insertPark($dbc);
+			$errors = insertPark($dbc);
 		} else {
 			$error = "All fields must be filled out";
 		}
@@ -51,7 +51,8 @@ function pageController($dbc)
 		'next' => $next,
 		'parks' => $parks,
 		'maxPage' => $maxPage,
-		'error' => $error
+		'error' => $error,
+		'errors' => $errors
 	);
 }
 extract(pageController($dbc));
@@ -96,12 +97,48 @@ function deletePark($dbc)
 
 function insertPark($dbc)
 {
-	$name = Input::getString('name');
-	$location = Input::getString('location');
-	$date_established = Input::getDate('date_established');
-	$area_in_acres = Input::getNumber('area_in_acres');
-	$url = Input::getString('url');
-	$description = Input::getString('description');
+	$errors = [];
+
+	try{
+		$name = Input::getString('name');
+	} catch (Exception $e) {
+    	array_push($errors, $e->getMessage());
+	}
+	
+	try{
+		$location = Input::getString('location');
+	} catch (Exception $e) {
+    	array_push($errors, $e->getMessage());
+	}
+
+	try{
+		$date_established = Input::getDate('date_established');
+		$date_established = $date_established->format("Y-m-d");
+	} catch (Exception $e) {
+    	array_push($errors, $e->getMessage());
+	}
+
+	try{
+		$area_in_acres = Input::getNumber('area_in_acres');
+	} catch (Exception $e) {
+    	array_push($errors, $e->getMessage());
+	}
+
+	try{
+		$url = Input::getString('url');
+	} catch (Exception $e) {
+    	array_push($errors, $e->getMessage());
+	}
+
+	try{
+		$description = Input::getString('description');
+	} catch (Exception $e) {
+    	array_push($errors, $e->getMessage());
+	}
+
+	if(!empty($errors)) {
+		return $errors;
+	}
 
 	$userInput = $dbc->prepare('INSERT INTO national_parks (name, location, date_established, area_in_acres, url, description) VALUES (:name, :location, :date_established, :area_in_acres, :url, :description)');		
 	$userInput->bindValue(':name', ucfirst($name),  PDO::PARAM_STR);
@@ -111,6 +148,8 @@ function insertPark($dbc)
 	$userInput->bindValue(':url', $url,  PDO::PARAM_STR);
 	$userInput->bindValue(':description', ucfirst($description),  PDO::PARAM_STR);
 	$userInput->execute();
+
+	return $errors;
 }
 
 function checkValues()
@@ -118,7 +157,7 @@ function checkValues()
 	return (Input::notEmpty('name') && Input::notEmpty('location') && Input::notEmpty('date_established') && Input::notEmpty('area_in_acres') && Input::notEmpty('description') && Input::notEmpty('url'));
 }
 
-
+var_dump($errors);
 ?>
 <!DOCTYPE html>
 <html>
@@ -176,6 +215,11 @@ function checkValues()
 	<div class="well submit_form">
 		<form method="POST">
 			<h4><?= $error ?></h4>
+			<?php if(!empty($errors)): ?> 
+				<?php foreach($errors as $errorMessage): ?> 
+					<h4><?= $errorMessage ?></h4>
+				<?php endforeach ?>
+			<?php endif ?>
 			<div class="form-group">
 				<label for="name">Name *</label>
 				<input type="text" class="form-control" name="name" placeholder="Enter a park name">

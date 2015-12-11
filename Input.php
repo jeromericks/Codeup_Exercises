@@ -51,6 +51,8 @@ class Input
     {
         $value = trim(self::get($key));
         if(!is_string($value)){
+            $key = ucfirst($key);
+            $key = str_replace('_', ' ', $key);
             throw new Exception("{$key} must be a string!");
         }
         return $value;
@@ -60,6 +62,8 @@ class Input
     {
         $value = trim(str_replace(',', '', self::get($key)));
         if(!is_numeric($value) || $value < 0){
+            $key = ucfirst($key);
+            $key = str_replace('_', ' ', $key);
             throw new Exception("{$key} must be a positive number!");
         } 
         return $value;
@@ -68,11 +72,14 @@ class Input
     public static function getDate($key)
     {
         $date = self::get($key);
-        if(!strtotime($date)){
-            throw new Exception("{$key} must be a valid date in the format of MM/DD/YYYY!");
-        } else {
-            return date("Y-m-d", strtotime($date));
+        try{
+            $dateObj = new DateTime($date);
+        } catch(Exception $e) {
+            $key = ucfirst($key);
+            $key = str_replace('_', ' ', $key);
+            throw new Exception("{$key} must be a valid date in the format of MM/DD/YYYY");
         }
+        return $dateObj;
         
     }
 
