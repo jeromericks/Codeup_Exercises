@@ -78,7 +78,7 @@ class Input
         return $value;
     }
 
-    public static function getNumber($key, $min = 1, $max = 99999999999)
+    public static function getNumber($key, $min = 1, $max = 99999999)
     {
         $value = trim(str_replace(',', '', self::get($key)));
 
@@ -115,7 +115,7 @@ class Input
         } catch (DateRangeException $e) {
             throw new Exception( $e->getMessage() );
         } catch (Exception $e) {
-            throw new Exception('Please enter a valid date.');
+            throw new Exception(self::formatKey($key) . ' must be a valid date!');
         }
         
     }
