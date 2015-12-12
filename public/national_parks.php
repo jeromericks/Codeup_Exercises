@@ -19,9 +19,7 @@ function pageController($dbc)
 	if(!empty($_POST)){
 		if(checkValues()) {
 			$errors = insertPark($dbc);
-		} else {
-			$error = "All fields must be filled out";
-		}
+		} 
 	}
 	deletePark($dbc);
 

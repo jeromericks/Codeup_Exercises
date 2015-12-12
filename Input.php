@@ -1,5 +1,7 @@
 <?php
 
+class DateRangeException extends Exception { }
+
 class Input
 {
     /**
@@ -47,40 +49,83 @@ class Input
         return htmlspecialchars(strip_tags($input));
     }
 
-    public static function getString($key)
+    public static function getString($key, $min = 1, $max = 254)
     {
         $value = trim(self::get($key));
-        if(!is_string($value)){
-            $key = ucfirst($key);
-            $key = str_replace('_', ' ', $key);
-            throw new Exception("{$key} must be a string!");
+        var_dump($key);
+
+        if(!self::notEmpty($key)){
+            throw new OutOfRangeException(self::formatKey($key) . ' is out of range!');
+        } 
+
+        if (!is_string($value)) {
+            throw new DomainException(self::formatKey($key) . ' must be a string!');
+        }  
+
+        if ($key != 'url') {
+            if(preg_match('/[\d]/', $value)) {
+                throw new DomainException(self::formatKey($key) . ' must be a string!');
+            }
+        }
+
+        if(!is_string($value) || !is_numeric($min) && !is_numeric($max)) {
+            throw new InvalidArgumentException(self::formatKey($key) . ' must be a string and the number of characters must be numeric values!');
+        } 
+
+        if (strlen($value) < $min || strlen($value) > $max) {
+            throw new LengthException(self::formatKey($key) . ' must be between ' . $min . ' characters and ' . $max . ' characters long!');
         }
         return $value;
     }
 
-    public static function getNumber($key)
+    public static function getNumber($key, $min = 1, $max = 99999999999)
     {
         $value = trim(str_replace(',', '', self::get($key)));
-        if(!is_numeric($value) || $value < 0){
-            $key = ucfirst($key);
-            $key = str_replace('_', ' ', $key);
-            throw new Exception("{$key} must be a positive number!");
-        } 
+
+        if (!self::notEmpty($key)){
+            throw new OutOfRangeException(self::formatKey($key) . ' is out of range!');
+        } else if (!is_numeric($value)) {
+            throw new DomainException(self::formatKey($key) . ' must be a number!');
+        } else if(!is_numeric($value) || $value < 0 || !is_numeric($min) && !is_numeric($max)){
+            throw new Exception(self::formatKey($key) . ' must be a positive number!');
+        } else if ($value < $min || $value > $max) {
+            throw new RangeException(self::formatKey($key) . ' must be between ' . $min . ' characters and ' . $max . ' characters long!');
+        }
         return $value;
     }
 
-    public static function getDate($key)
+    public static function getDate($key, $min = '1776-07-04', $max = 'next month')
     {
         $date = self::get($key);
-        try{
+        $min = new DateTime($min);
+        $max = new DateTime($max);
+        try {
             $dateObj = new DateTime($date);
-        } catch(Exception $e) {
-            $key = ucfirst($key);
-            $key = str_replace('_', ' ', $key);
-            throw new Exception("{$key} must be a valid date in the format of MM/DD/YYYY");
+
+            if ($dateObj < $min) {
+                throw new DateRangeException(self::formatKey($key) .' too far in the past.');
+            }
+
+            if ($dateObj > $max) {
+                throw new DateRangeException(self::formatKey($key) . ' too far in the future.');
+            }
+
+            return $dateObj;
+            
+        } catch (DateRangeException $e) {
+            throw new Exception( $e->getMessage() );
+        } catch (Exception $e) {
+            throw new Exception('Please enter a valid date.');
         }
-        return $dateObj;
         
+    }
+
+    public static function formatKey($key)
+    {
+        $key = ucfirst($key);
+        $key = str_replace('_', ' ', $key);
+
+        return $key;
     }
 
     ///////////////////////////////////////////////////////////////////////////
