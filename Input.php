@@ -113,7 +113,7 @@ class Input
             return $dateObj;
             
         } catch (DateRangeException $e) {
-            throw new Exception( $e->getMessage() );
+            throw new Exception($e->getMessage());
         } catch (Exception $e) {
             throw new Exception(self::formatKey($key) . ' must be a valid date!');
         }
