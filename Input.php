@@ -99,6 +99,7 @@ class Input
         $date = self::get($key);
         $min = new DateTime($min);
         $max = new DateTime($max);
+        
         try {
             $dateObj = new DateTime($date);
 
