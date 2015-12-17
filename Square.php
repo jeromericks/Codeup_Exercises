@@ -20,4 +20,3 @@ class Square extends Rectangle
 	}
 }
 
-?>
