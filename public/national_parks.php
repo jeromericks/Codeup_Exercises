@@ -156,6 +156,7 @@ function checkValues()
 }
 
 var_dump($errors);
+
 ?>
 <!DOCTYPE html>
 <html>
