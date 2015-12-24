@@ -11,7 +11,7 @@ function pageController($dbc)
 	$error = '';
 	$errors = NULL;
 	$limit = 2;
-	
+
 	$pageNumber = Input::has('pageNumber') ? Input::get('pageNumber') : 1;
 	$pageNumber = ($pageNumber > 0) ? $pageNumber : 1;
 	$pageNumber = (is_numeric($pageNumber)) ? $pageNumber : 1;
@@ -54,6 +54,7 @@ function pageController($dbc)
 		'errors' => $errors
 	);
 }
+
 extract(pageController($dbc));
 
 
