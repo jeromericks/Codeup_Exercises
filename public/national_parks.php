@@ -29,6 +29,7 @@ function pageController($dbc)
 	$stmt->bindValue(':offset', $offset, PDO::PARAM_INT);
 	$stmt->bindValue(':limit', $limit, PDO::PARAM_INT); 
 	$stmt->execute();
+	
 	$parks = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 
