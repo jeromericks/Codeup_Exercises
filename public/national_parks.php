@@ -29,7 +29,7 @@ function pageController($dbc)
 	$stmt->bindValue(':offset', $offset, PDO::PARAM_INT);
 	$stmt->bindValue(':limit', $limit, PDO::PARAM_INT); 
 	$stmt->execute();
-	
+
 	$parks = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 
@@ -82,6 +82,7 @@ function comma($number)
 			$number = substr($number, -10, 1) . ',' . substr($number, -9, 3) . ',' . substr($number, -6);
 		}
 	}
+	
 	return $number;
 
 }
