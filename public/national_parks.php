@@ -82,7 +82,7 @@ function comma($number)
 			$number = substr($number, -10, 1) . ',' . substr($number, -9, 3) . ',' . substr($number, -6);
 		}
 	}
-	
+
 	return $number;
 
 }
@@ -91,6 +91,7 @@ function deletePark($dbc)
 {
 	if(Input::notEmpty('id')){
 		$id = Input::get('id');
+		
 		$delete = $dbc->prepare('DELETE FROM national_parks WHERE id = :id');
 		$delete->bindValue(':id', $id, PDO::PARAM_INT);
 		$delete->execute();
